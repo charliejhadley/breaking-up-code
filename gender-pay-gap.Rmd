@@ -1,0 +1,36 @@
+---
+title: "Pay Gap Analysis"
+output: html_document
+date: "2022-09-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+```
+
+Let's read in the data
+
+```{r load-data}
+paygap_data <- read_csv("data/paygap_clean.csv")
+```
+
+## Bonuses
+
+Now let's look at bonuses
+
+```{r boxwhisker-bonuses}
+paygap_data %>% 
+  select(employer_name, contains("bonus")) %>% 
+  pivot_longer(contains("percent")) %>% 
+  ggplot(aes(x = name,
+             y = value)) +
+  geom_boxplot()
+```
+
+
+
+
